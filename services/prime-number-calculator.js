@@ -29,10 +29,10 @@ function calculateMedianPrimeNumbers(upperLimit) {
     const isEven = isDivisible(sorted.length, 2);
 
     if (isEven) {
-      return sorted[(sorted.length / 2)];
+      return sorted.slice((sorted.length / 2 - 1), (sorted.length / 2 + 1));
     }
 
-    return sorted.slice(Math.floor(sorted.length / 2), Math.ceil(sorted.length / 2));
+    return [sorted[Math.floor(sorted.length / 2)]];
   }
 }
 

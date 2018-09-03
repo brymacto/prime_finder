@@ -20,4 +20,16 @@ describe('GET /prime_numbers', () => {
       })
       .then(done());
   });
+
+  it('returns multiple medians when applicable', (done) => {
+    request(app)
+      .get('/prime_numbers')
+      .query({ upper_limit: 18 })
+      .set('Accept', 'application/json')
+      .then((response) => {
+        expect(response.body).toEqual({ median: [7] });
+      })
+      .then(done());
+  });
+
 });
