@@ -1,16 +1,6 @@
 const request = require('supertest');
 const app = require('../../app');
 
-function expectBody(expectedBody) {
-  return (error, response) => {
-    if (error) {
-      throw new Error(error);
-    }
-
-    expect(response.body).toEqual(expectedBody);
-  };
-}
-
 describe('GET /prime_numbers', () => {
   it('responds successfully with json', () => {
     request(app)
@@ -25,6 +15,9 @@ describe('GET /prime_numbers', () => {
       .get('/prime_numbers')
       .query({ upper_limit: 18 })
       .set('Accept', 'application/json')
-      .end(expectBody({ median: [7] }), done);
+      .then((response) => {
+        expect(response.body).toEqual({ median: [7] });
+      })
+      .then(done());
   });
 });
