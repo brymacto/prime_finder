@@ -7,6 +7,7 @@
     "preinstall": "node -e \"if (process.env.npm_execpath.indexOf('yarn') === -1) throw new Error('Use yarn install for installing')\"",
     "lint": "yarn run eslint",
     "test": "jest",
+    "test:watch": "jest --watch",
     "eslint": "eslint --config ./.eslintrc './**/*.js'"
   },
   "dependencies": {
