@@ -32,6 +32,8 @@ app.use((err, req, res, _next) => {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+
+  // Do not call _next, as we want to end the response
 });
 
 module.exports = app;

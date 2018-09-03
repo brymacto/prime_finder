@@ -11,11 +11,19 @@ function expectBody(body) {
 }
 
 describe('GET /prime_numbers', () => {
-  it('respond successfully with json', () => {
+  it('responds successfully with json', () => {
     request(app)
       .get('/prime_numbers')
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200);
+  });
+
+  it('when given upper limit n, responds with median of the set of prime numbers less than n', () => {
+    request(app)
+      .get('/prime_numbers')
+      .query({ upper_limit: 18 })
+      .set('Accept', 'application/json')
+      .end(expectBody({ median: [7] }));
   });
 });
