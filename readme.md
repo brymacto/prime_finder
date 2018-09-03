@@ -4,4 +4,7 @@
 * `yarn install`
 
 ## Running the application in development mode
-* `yarn start`
+* In root directory: `yarn start`
+  * Express server will run on port `3001` by default
+* In `client` directory: `yarn start`
+  * Client will run on port `3000` by default
