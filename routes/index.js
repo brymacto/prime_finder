@@ -8,12 +8,11 @@ router.get('/', (req, res, _next) => {
   res.render('index', { title: 'Express' });
 });
 
-router.get('/prime_numbers', (req, res, next) => {
+router.get('/prime_numbers', (req, res) => {
   res
     .set('Content-Type', 'application/json')
     .status(200)
     .send({ median: primeNumberCalculator(req.query.upper_limit) });
-  next();
 });
 
 module.exports = router;
