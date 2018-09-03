@@ -3,15 +3,22 @@ const filter = require('lodash/filter');
 const isEqual = require('lodash/isEqual');
 const partial = require('lodash/partial');
 const sortBy = require('lodash/sortBy');
+const reduce = require('lodash/reduce');
 
 function calculateMedianPrimeNumbers(upperLimit) {
-  return originalCalculateMedianPrimeNumbers(upperLimit);
-}
-
-function originalCalculateMedianPrimeNumbers(upperLimit) {
   const primeNumberCandidates = range(2, upperLimit);
 
-  const primeNumbers = filter(primeNumberCandidates, isPrime);
+  const primeNumbers = reduce(
+    primeNumberCandidates,
+    (result, value, _index, _candidatesCollection) => {
+      if (isPrime(value)) {
+        result.push(value);
+      }
+
+      return result;
+    },
+    [],
+  );
 
   return median(primeNumbers);
 }
