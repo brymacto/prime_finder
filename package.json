@@ -6,6 +6,7 @@
     "start": "node ./bin/www",
     "preinstall": "node -e \"if (process.env.npm_execpath.indexOf('yarn') === -1) throw new Error('Use yarn install for installing')\"",
     "lint": "yarn run eslint",
+    "test": "jest",
     "eslint": "eslint --config ./.eslintrc './**/*.js'"
   },
   "dependencies": {
@@ -22,6 +23,13 @@
     "eslint": "4.19.1",
     "eslint-plugin-import": "2.14.0",
     "eslint-plugin-jsx-a11y": "6.1.1",
-    "eslint-plugin-react": "7.11.0"
+    "eslint-plugin-react": "7.11.0",
+    "jest": "^23.5.0"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "<rootDir>/client/"
+    ]
   }
 }
