@@ -1,6 +1,7 @@
 const range = require('lodash/range');
 const filter = require('lodash/filter');
 const isEqual = require('lodash/isEqual');
+const partial = require('lodash/partial');
 
 function calculateMedianPrimeNumbers(upperLimit) {
   const primeNumberCandidates = range(2, upperLimit);
@@ -12,11 +13,13 @@ function calculateMedianPrimeNumbers(upperLimit) {
   function isPrime(primeCandidate) {
     const divisibleCandidates = range(1, primeCandidate + 1);
 
-    const divisibles = filter(divisibleCandidates, (divisibleCandidate) => {
-      return (primeCandidate % divisibleCandidate) === 0;
-    });
+    const divisibleNumbers = filter(divisibleCandidates, partial(isDivisible, primeCandidate));
 
-    return isEqual(divisibles, [1, primeCandidate]);
+    return isEqual(divisibleNumbers, [1, primeCandidate]);
+  }
+
+  function isDivisible(number, divisibleCandidate) {
+    return (number % divisibleCandidate) === 0;
   }
 }
 
