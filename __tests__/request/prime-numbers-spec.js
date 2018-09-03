@@ -31,5 +31,4 @@ describe('GET /prime_numbers', () => {
       })
       .then(done());
   });
-
 });
