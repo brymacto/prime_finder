@@ -66,14 +66,15 @@ function isDivisible(number, divisibleCandidate) {
 
 function median(numbers) {
   const sorted = sortBy(numbers, n => n);
+  const length = sorted.length;
 
-  const isEven = isDivisible(sorted.length, 2);
+  const isEven = isDivisible(length, 2);
 
   if (isEven) {
-    return sorted.slice((sorted.length / 2 - 1), (sorted.length / 2 + 1));
+    return sorted.slice((length / 2 - 1), (length / 2 + 1));
   }
 
-  return [sorted[Math.floor(sorted.length / 2)]];
+  return [sorted[Math.floor(length / 2)]];
 }
 
 module.exports = calculateMedianPrimeNumbers;
