@@ -5,45 +5,29 @@ const partial = require('lodash/partial');
 const sortBy = require('lodash/sortBy');
 const reduce = require('lodash/reduce');
 const map = require('lodash/map');
-const forEach = require('lodash/forEach');
-const pickBy = require('lodash/pickBy');
-const keys = require('lodash/keys');
+const difference = require('lodash/difference');
 
 function calculateMedianPrimeNumbers(upperLimit) {
   const primeNumberCandidates = range(2, upperLimit);
 
-  const primeNumbersDictionaryAllTrue = reduce(primeNumberCandidates,
-    (dictionary, primeNumberCandidate) => {
-      (dictionary)[primeNumberCandidate] = true;
-      return dictionary;
-    },
-    {});
-
   const effectiveUpperLimit = Math.sqrt(upperLimit);
 
-  const primeNumbersDictionary = reduce(
-    primeNumbersDictionaryAllTrue,
-    (result, stillEligible, candidate, candidatesCollection) => {
-      if (stillEligible === false || candidate > effectiveUpperLimit) {
-        return candidatesCollection;
+  const primeNumbers = reduce(
+    primeNumberCandidates,
+    (result, candidate) => {
+      if (candidate > effectiveUpperLimit) {
+        return result;
       }
 
       if (isPrime(parseInt(candidate, 10))) {
         const newlyIneligibleCandidates = multiplesToUpperLimit(candidate, upperLimit);
 
-        forEach(newlyIneligibleCandidates, (newlyIneligibleCandidate) => {
-          candidatesCollection[newlyIneligibleCandidate] = false;
-        });
-      } else {
-        candidatesCollection[candidate] = false;
+        return difference(result, newlyIneligibleCandidates);
       }
-
-      return candidatesCollection;
+      return difference(result, [candidate]);
     },
-    {},
+    primeNumberCandidates,
   );
-
-  const primeNumbers = map(keys(pickBy(primeNumbersDictionary, numberIsPrime => numberIsPrime)), intString => parseInt(intString, 10));
 
   return median(primeNumbers);
 }
@@ -66,7 +50,7 @@ function isDivisible(number, divisibleCandidate) {
 
 function median(numbers) {
   const sorted = sortBy(numbers, n => n);
-  const length = sorted.length;
+  const { length } = sorted;
 
   const isEven = isDivisible(length, 2);
 
