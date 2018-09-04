@@ -31,7 +31,7 @@ class PrimeFinder extends Component {
       lastSubmittedUpperLimit,
     } = this.state;
 
-    let resultMessage = "";
+    let resultMessage = '';
 
     if (results.length > 0) {
       resultMessage = `Your results are: ${results.toString()}. Thanks for checking!`;

@@ -10,7 +10,7 @@ describe('GET /prime_numbers', () => {
       .expect(200);
   });
 
-  it('when given upper limit n, responds with median of the set of prime numbers less than n', (done) => {
+  it('when given upper limit n, responds with the correct shape', (done) => {
     request(app)
       .get('/prime_numbers')
       .query({ upper_limit: 18 })
