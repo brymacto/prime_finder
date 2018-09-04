@@ -6,6 +6,7 @@ const sortBy = require('lodash/sortBy');
 const reduce = require('lodash/reduce');
 const map = require('lodash/map');
 const difference = require('lodash/difference');
+const without = require('lodash/without');
 
 function calculateMedianPrimeNumbers(upperLimit) {
   const primeNumberCandidates = range(2, upperLimit);
@@ -30,7 +31,8 @@ function calculateMedianPrimeNumbers(upperLimit) {
 
       return difference(result, newlyIneligibleCandidates);
     }
-    return difference(result, [candidate]);
+
+    return without(result, candidate);
   }
 }
 
