@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import PrimeFinder from "./components/PrimeFinder";
 import './App.css';
 
 class App extends Component {
@@ -7,12 +7,13 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">Prime Finder</h1>
         </header>
         <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
+          Enter a number as an upper limit, and I'll tell you the median(s) of the set of prime numbers less than the upper limit.
         </p>
+
+        <PrimeFinder />
       </div>
     );
   }
