@@ -14,22 +14,24 @@ function calculateMedianPrimeNumbers(upperLimit) {
 
   const primeNumbers = reduce(
     primeNumberCandidates,
-    (result, candidate) => {
-      if (candidate > effectiveUpperLimit) {
-        return result;
-      }
-
-      if (isPrime(parseInt(candidate, 10))) {
-        const newlyIneligibleCandidates = multiplesToUpperLimit(candidate, upperLimit);
-
-        return difference(result, newlyIneligibleCandidates);
-      }
-      return difference(result, [candidate]);
-    },
+    removeCompositeNumbers,
     primeNumberCandidates,
   );
 
   return median(primeNumbers);
+
+  function removeCompositeNumbers(result, candidate) {
+    if (candidate > effectiveUpperLimit) {
+      return result;
+    }
+
+    if (isPrime(parseInt(candidate, 10))) {
+      const newlyIneligibleCandidates = multiplesToUpperLimit(candidate, upperLimit);
+
+      return difference(result, newlyIneligibleCandidates);
+    }
+    return difference(result, [candidate]);
+  }
 }
 
 function multiplesToUpperLimit(number, upperLimit) {
