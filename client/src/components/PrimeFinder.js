@@ -33,8 +33,10 @@ class PrimeFinder extends Component {
 
     let resultMessage = '';
 
-    if (results.length > 0) {
-      resultMessage = `Your results are: ${results.toString()}. Thanks for checking!`;
+    if (results.length === 1) {
+      resultMessage = `Your result is: ${results.toString()}. Thanks for checking!`;
+    } else if (results.length > 0) {
+      resultMessage = `Your results are: ${results.join(', ')}. Thanks for checking!`;
     } else if (lastSubmittedUpperLimit === upperLimit) {
       resultMessage = `No prime numbers were found for ${upperLimit}. Try another number!`;
     } else {
