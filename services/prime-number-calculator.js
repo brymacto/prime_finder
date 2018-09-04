@@ -1,19 +1,31 @@
 const range = require('lodash/range');
 const filter = require('lodash/filter');
+const map = require('lodash/map');
 const isEqual = require('lodash/isEqual');
 const partial = require('lodash/partial');
 const sortBy = require('lodash/sortBy');
 const reduce = require('lodash/reduce');
+const pullAll = require('lodash/pullAll');
+const isUndefined = require('lodash/isUndefined');
 
 function calculateMedianPrimeNumbers(upperLimit) {
   const primeNumberCandidates = range(2, upperLimit);
 
   const primeNumbers = reduce(
     primeNumberCandidates,
-    (result, value, _index, _candidatesCollection) => {
+    (result, value, _index, candidatesCollection) => {
+      if (isUndefined(value)) {
+        return result;
+      }
+
       if (isPrime(value)) {
         result.push(value);
+        const newlyIneligibleCandidates = map(range(1, (upperLimit / value)), n => (n * value));
+        pullAll(candidatesCollection, newlyIneligibleCandidates);
+        pullAll(primeNumberCandidates, newlyIneligibleCandidates);
       }
+
+
 
       return result;
     },
