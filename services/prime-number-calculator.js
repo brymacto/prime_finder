@@ -12,26 +12,27 @@ const keys = require('lodash/keys');
 function calculateMedianPrimeNumbers(upperLimit) {
   const primeNumberCandidates = range(2, upperLimit);
 
-  const isPrimeEligible = reduce(primeNumberCandidates,
-    (result, value) => {
-      (result)[value] = true;
-      return result;
+  const primeNumbersDictionaryAllTrue = reduce(primeNumberCandidates,
+    (dictionary, primeNumberCandidate) => {
+      (dictionary)[primeNumberCandidate] = true;
+      return dictionary;
     },
     {},
   );
 
   const primeNumbersDictionary = reduce(
-    isPrimeEligible,
+    primeNumbersDictionaryAllTrue,
     (result, stillEligible, candidate, candidatesCollection) => {
       if (stillEligible === false) {
         return candidatesCollection;
       }
+
       if (isPrime(parseInt(candidate, 10))) {
-        const newlyIneligibleCandidates = map(range(1, (upperLimit / candidate)), n => (n * candidate));
+        const newlyIneligibleCandidates = multiplesToUpperLimit(candidate, upperLimit);
+
         forEach(newlyIneligibleCandidates, (newlyIneligibleCandidate) => {
           candidatesCollection[newlyIneligibleCandidate] = false;
         });
-        candidatesCollection[candidate] = true;
       } else {
         candidatesCollection[candidate] = false;
       }
@@ -44,6 +45,10 @@ function calculateMedianPrimeNumbers(upperLimit) {
   const primeNumbers = map(keys(pickBy(primeNumbersDictionary, numberIsPrime => numberIsPrime)), intString => parseInt(intString, 10));
 
   return median(primeNumbers);
+}
+
+function multiplesToUpperLimit(number, upperLimit) {
+  return map(range(number, (upperLimit / number)), n => (n * number));
 }
 
 function isPrime(primeCandidate) {
