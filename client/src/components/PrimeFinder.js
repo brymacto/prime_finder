@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class PrimeFinder extends Component {
   constructor(props) {
     super(props);
-    this.state = { upperLimit: '', results: [] };
+    this.state = { upperLimit: '', results: [], lastSubmittedUpperLimit: null };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -17,7 +17,7 @@ class PrimeFinder extends Component {
 
     fetch(`/prime_numbers?upper_limit=${upperLimit}`)
       .then(res => res.json())
-      .then(results => this.setState({ results: results.median }));
+      .then(results => this.setState({ results: results.median, lastSubmittedUpperLimit: upperLimit }));
 
 
     event.preventDefault();
@@ -28,7 +28,18 @@ class PrimeFinder extends Component {
     const {
       results,
       upperLimit,
+      lastSubmittedUpperLimit,
     } = this.state;
+
+    let resultMessage = "";
+
+    if (results.length > 0) {
+      resultMessage = `Your results are: ${results.toString()}. Thanks for checking!`;
+    } else if (lastSubmittedUpperLimit === upperLimit) {
+      resultMessage = `No prime numbers were found for ${upperLimit}. Try another number!`;
+    } else {
+      resultMessage = "Submit a number to get the answer you're looking for!";
+    }
 
     return (
       <div className="prime-finder-container">
@@ -37,9 +48,7 @@ class PrimeFinder extends Component {
           <input type="submit" />
         </form>
 
-        { results.length > 0 &&
-        <p>Your results are: {results.toString()}. Try another number! </p>
-        }
+        <p>{ resultMessage } </p>
 
 
       </div>
