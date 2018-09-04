@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PrimeFinder from "./components/PrimeFinder";
+import PrimeFinder from './components/PrimeFinder';
 import './App.css';
 
 class App extends Component {

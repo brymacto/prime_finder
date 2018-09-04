@@ -1,5 +1,5 @@
 const express = require('express');
-const primeNumberCalculator = require('../services/prime-number-calculator')
+const primeNumberCalculator = require('../services/prime-number-calculator');
 
 const router = express.Router();
 

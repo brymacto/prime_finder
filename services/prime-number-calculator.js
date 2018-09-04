@@ -17,8 +17,7 @@ function calculateMedianPrimeNumbers(upperLimit) {
       (dictionary)[primeNumberCandidate] = true;
       return dictionary;
     },
-    {},
-  );
+    {});
 
   const effectiveUpperLimit = Math.sqrt(upperLimit);
 

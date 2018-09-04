@@ -19,7 +19,6 @@ class PrimeFinder extends Component {
       .then(res => res.json())
       .then(results => this.setState({ results: results.median, lastSubmittedUpperLimit: upperLimit }));
 
-
     event.preventDefault();
   }
 
@@ -51,7 +50,6 @@ class PrimeFinder extends Component {
         </form>
 
         <p>{ resultMessage } </p>
-
 
       </div>
     );
