@@ -5,7 +5,7 @@ Prime Finder is a simple app built using an Express back end and a React front e
 A user can submit an upper limit. Given this upper limit `n`, Prime Finder returns the median prime number(s) of the set of prime numbers less than `n`.
 
 ## Setting up your environment
-* `yarn install`
+* Run `yarn install` in both the root and `client` directories
 
 ## Running the application in development mode
 * In root directory: `yarn start`
