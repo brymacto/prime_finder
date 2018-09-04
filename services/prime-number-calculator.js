@@ -20,10 +20,12 @@ function calculateMedianPrimeNumbers(upperLimit) {
     {},
   );
 
+  const effectiveUpperLimit = Math.sqrt(upperLimit);
+
   const primeNumbersDictionary = reduce(
     primeNumbersDictionaryAllTrue,
     (result, stillEligible, candidate, candidatesCollection) => {
-      if (stillEligible === false) {
+      if (stillEligible === false || candidate > effectiveUpperLimit) {
         return candidatesCollection;
       }
 
